@@ -1,0 +1,312 @@
+:root {
+    --text-color-1: #1c1c1c;
+    --text-color-2:#838383;
+    --text-color-3:#fff;
+
+    --text-color-accent-1:#21A50C;
+    --text-color-accent-2:#CE3636;
+
+    --underline-color:#fff;
+
+    --background-color-1:#9CFF8C;
+    --background-color-2:#fff;
+    --background-color-3:#292929;
+    --background-color-4:#D9D9D9;
+    
+    --placehoder-color:#585a59;
+
+    --border: 3px solid #1c1c1c;
+    --border-buttons: 2px solid #1c1c1c;
+    --border-radius: 30px;
+    --border-radius-textfield: 20px;
+    --border-radius-image: 10px;
+}
+
+:root.dark-mode {
+    --text-color-1:#fff;
+    --text-color-2:#acacac;
+    --text-color-3: #1c1c1c;
+
+    --text-color-accent-1:#393939;
+    --text-color-accent-2:#CE3636;
+
+    --underline-color:#1c1c1c;
+
+    --background-color-1:#393939;
+    --background-color-2:#888787;
+    --background-color-3:#292929;
+    --background-color-4:#585a59;
+    
+    --placehoder-color:#D9D9D9;
+
+    --border: 3px solid #fff;
+    --border-buttons: 2px solid #fff;
+    --border-radius: 30px;
+    --border-radius-textfield: 20px;
+    --border-radius-image: 10px;
+}
+
+html {
+    font-size: 13px;
+}
+
+@media screen and (min-width: 60em) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 75em) {
+  html {
+    font-size: 18px;
+  }
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: "Roboto", sans-serif;
+    color: var(--text-color-1);
+    line-height: 1.45;
+    background-color: var(--background-color-1);
+}
+
+main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main__container--user-interaction {
+  max-width: 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto;
+  background: var(--background-color-2);
+  border: var(--border);
+  border-radius: var(--border-radius);
+}
+
+.main__container__divider {
+  width: 100%;
+  background: var(--text-color-1);
+  height: 3px;
+}
+
+.user__container--today-button {
+  width: 101%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+}
+
+.button--add_new {
+  color: var(--text-color-1);
+}
+
+.button--add_new:hover {
+  color: var(--text-color-accent-2);  
+}
+
+.user__container--dates-display {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+}
+
+.dates__link {
+  color: var(--text-color-1);
+  text-decoration: none;
+  outline: none;
+  padding: 0.25rem 0.75rem;
+  background: var(--background-color-4);
+  border: var(--border-buttons);
+  border-radius: var(--border-radius-image);
+  width: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.5rem;
+}
+
+.dates__link--current {
+  background: var(--background-color-1);
+  width: 5rem;
+  height: 5rem;
+}
+
+.dates__link:hover {
+  background: var(--text-color-accent-1);
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 600;
+}
+
+.dates__link:first-of-type,
+.dates__link:last-of-type,
+.dates__link:nth-of-type(2),
+.dates__link:nth-last-of-type(2) {
+  display: none;
+}
+/* If the screen is really small we want to display only a 3 of them.
+We are gonna have the media query to show more elements when the screen grows */
+
+@media screen and (min-width: 60em) {
+  .main__container--user-interaction {
+    max-width: 40rem;
+  }
+  .dates__link:nth-of-type(2),
+  .dates__link:nth-last-of-type(2) {
+      display: block;
+  }
+  /* as the screen grows we are gonna add the 2 elements both from the right and from the end (making them 5) */
+}
+
+@media screen and (min-width: 75em) {
+  .main__container--user-interaction {
+    max-width: 50rem;
+  }
+  .dates__link:first-of-type,
+  .dates__link:last-of-type {
+      display: block;
+  }
+  /* If the screen is bigger than 35rem, we'll show all the elements */
+}
+
+.main__container--display {
+  width: 45rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 60em) {
+  .main__container--display {
+    width: 50rem;
+  }
+}
+
+.entry__block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--background-color-2);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.entry__block--title-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.entry__description--content {
+  white-space: pre-line;
+}
+
+.entry__description--content:first-line { 
+  line-height: 0; 
+}
+
+.entry__block--empty {
+  background: var(--background-color-2);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 4.5rem;
+  width: 30rem;
+}
+
+@media screen and (min-width: 60em) {
+  .entry__block--empty {
+    width: 40rem;
+  }
+}
+
+@media screen and (min-width: 75em) {
+  .entry__block--empty {
+    width: 50rem;
+  }
+}
+
+.entry__button-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.entry__link {
+  text-decoration: none;
+  color: var(--text-color-1);
+  font-weight: 600;
+}
+
+.entry__delete:hover {
+  color: var(--text-color-accent-2);
+}
+
+.entry__description {
+  margin-bottom: 1rem;
+}
+
+.entry__description--button {
+  background:none;
+  border:none;
+}
+
+.entry__link:hover {
+  text-decoration: underline;
+}
+
+.more {
+  display: none;
+}
+
+.entry__block--tags {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.entry__tag {
+  background: var(--background-color-4);
+  padding: 0.4rem 0.5rem;
+  font-weight: 600;
+  min-width: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.entry__tag:not(:last-of-type) {
+  margin-right: 0.5rem;
+} 

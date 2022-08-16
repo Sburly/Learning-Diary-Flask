@@ -1,0 +1,10 @@
+.footer {
+    padding: 1.5rem 0;
+    background: var(--background-color-3);
+    color: #dddddd;
+    text-align: center;
+}
+
+.footer__text {
+    display: block;
+}

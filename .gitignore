@@ -1,0 +1,6 @@
+learning_diary/.env
+learning_diary/__pycache__
+.venv
+.venv/
+venv
+.flaskenv

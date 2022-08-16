@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+{% block main_content %}
+<div class="main__container">
+    <div class="main__container--user-interaction">
+        <section class="user__container--today-button">
+            <h2 class="today">Today: {{ today }}</h2>
+            <a href="{{ url_for('pages.add', date=date_range(selected_date)[3]) }}" class="button--add_new">+ Add
+                New</a>
+        </section>
+        <hr class="main__container__divider" />
+        <section class="user__container--dates-display">
+            {% for date in date_range(selected_date) %}
+            <a class="dates__link {{'dates__link--current' if loop.index0 == 3 else '' }}"
+                href="{{ url_for('pages.index', date=date) }}">
+                <time class="date" datetime="{{ date }}">
+                    <span>{{ date.strftime("%a") }}</span>
+                    <span>{{ date.strftime("%d") }}</span>
+                </time>
+            </a>
+            {% endfor %}
+        </section>
+    </div>
+    <div class="main__container--display">
+        {% if not entries %}
+        <div class="entry__block--empty">
+            <h3 class="entry__title--empty">
+                Add your entries <a href="{{ url_for('pages.add', date=date_range(selected_date)[3]) }}"
+                    class="button--add_new entry__link--empty">here</a>
+            </h3>
+        </div>
+        {% else %}
+        {% for entry in entries %}
+        <article class="entry__block">
+            <section class="entry__block--title-links">
+                <h2 class="entry__title">
+                    {{ entry.title }}
+                </h2>
+                <div class="entry__button-links">
+                    <a class="entry__link entry__edit" href="{{ url_for('pages.edit', _id=entry._id) }}">
+                        Edit
+                    </a>
+                    <a class="entry__link entry__delete" href="{{ url_for('pages.delete', _id=entry._id) }}">
+                        Delete
+                    </a>
+                </div>
+            </section>
+            <script>
+                function readMore(_id) {
+                    let dots = document.querySelector(`.entry__description[data-entry="${_id}"] .dots`);
+                    let moreText = document.querySelector(`.entry__description[data-entry="${_id}"] .more`);
+                    let btnText = document.querySelector(`.entry__description[data-entry="${_id}"] .entry__description--button`);
+
+                    if (dots.style.display === "none") {
+                        dots.style.display = "inline";
+                        btnText.textContent = "View more";
+                        moreText.style.display = "none";
+                    } else {
+                        dots.style.display = "none";
+                        btnText.textContent = "View less";
+                        moreText.style.display = "inline";
+                    }
+                }
+            </script>
+            <div class="entry__description" data-entry="{{ entry._id }}">
+                {% set len = entry.description | length %}
+                {% if len >= 350 %}
+                <p class="entry__description--content">
+                    {{ entry.description[:350] }}<span class="dots">...</span><span class="more">{{
+                        entry.description[350:] }}</span>
+                </p>
+                <button onclick="readMore('{{ entry._id }}')" class="entry__link entry__description--button">View
+                    more</button>
+                {% else %}
+                <p class="entry__description--content">
+                    {{ entry.description }}
+                </p>
+                {% endif %}
+            </div>
+            <section class="entry__block--tags">
+                {% for tag in entry.tag %}
+                <div class="entry__tag">
+                    <small>
+                        {{ tag }}
+                    </small>
+                </div>
+                {% endfor %}
+            </section>
+        </article>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% from "macros/fields.html" import render_text_field, render_area_field, render_date_field %}
+{% extends 'layout.html' %}
+
+{% block head_content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/add_edit.css') }}" />
+{% endblock %}
+
+{% block main_content %}
+<form name="edit_entry" method="post" novalidate class="edit__form">
+    <h1 class="form__title">Edit Entry</h1>
+    <p class="form__date">
+        <time time="{{ entry.date }}">
+            {{ entry.date }}
+        </time>
+    </p>
+    <!-- To show flashed massages -->
+    <div class="form__container">
+        {{ form.hidden_tag() }}
+        {{ render_text_field(form.title, "Title") }}
+        {{ render_area_field(form.description, "Description") }}
+        <div class="tag__container">
+            {{ render_text_field(form.tag, "Tags") }}
+            <small class="form__small">
+                Separate the tags with a semicolon “;”
+            </small>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, message in messages %}
+        <span class="form__flash form__flash--{{ category }}"> {{ message }}</span>
+        {% endfor %}
+        {% endwith %}
+        <div>
+            {{ form.submit(class_="button button--form") }}
+        </div>
+    </div>
+</form>
+{% endblock %}
